@@ -23,12 +23,12 @@ RUN wget --quiet --output-document=android-sdk.tgz https://dl.google.com/android
     tar --extract --gzip --file=android-sdk.tgz --directory ${ANDROID_HOME}
   
 
-RUN ${ANDROID_HOME}/sdkmanager "platform-tools" && \ # Platform tools
-    ${ANDROID_HOME}/sdkmanager "platforms;android-$ANDROID_COMPILE_SDK" && \ # SDKs
-    ${ANDROID_HOME}/sdkmanager "build-tools;ANDROID_BUILD_TOOLS" && \ # Build tool
-    ${ANDROID_HOME}/sdkmanager "extras;android;m2repository" && \ # Extra
-    ${ANDROID_HOME}/sdkmanager "extras;google;m2repository" && \ # Extra
-    ${ANDROID_HOME}/sdkmanager "extras;google;google_play_services" # Extra
+RUN ${ANDROID_HOME}/sdkmanager "platform-tools" # Platform tools
+RUN ${ANDROID_HOME}/sdkmanager "platforms;android-$ANDROID_COMPILE_SDK" # SDKs
+RUN ${ANDROID_HOME}/sdkmanager "build-tools;ANDROID_BUILD_TOOLS" # Build tool
+RUN ${ANDROID_HOME}/sdkmanager "extras;android;m2repository" # Extra
+RUN ${ANDROID_HOME}/sdkmanager "extras;google;m2repository" # Extra
+RUN ${ANDROID_HOME}/sdkmanager "extras;google;google_play_services" # Extra
     
 # Android System Images, for emulators
 # Please keep these in descending order!
