@@ -25,9 +25,11 @@ RUN cd /opt \
     && unzip -q android-sdk-tools.zip -d ${ANDROID_HOME} \
     && rm -f android-sdk-tools.zip
 
+ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
+
 RUN ls
 
-RUN ${ANDROID_HOME}/sdkmanager "platform-tools" # Platform tools
+RUN sdkmanager "platform-tools" # Platform tools
 RUN ${ANDROID_HOME}/sdkmanager "platforms;android-$ANDROID_COMPILE_SDK" # SDKs
 RUN ${ANDROID_HOME}/sdkmanager "build-tools;ANDROID_BUILD_TOOLS" # Build tool
 RUN ${ANDROID_HOME}/sdkmanager "extras;android;m2repository" # Extra
