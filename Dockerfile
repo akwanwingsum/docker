@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 MAINTAINER Anthony KWS <a.kwanwingsum@futurdigital.fr>
 
-ENV ANDROID_HOME "/android-sdk-linux"
+ENV ANDROID_HOME "/opt/android-sdk-linux"
 ENV ANDROID_COMPILE_SDK "26"
 ENV ANDROID_BUILD_TOOLS "26.0.0"
 ENV ANDROID_SDK_TOOLS "24.4.1"
@@ -20,7 +20,8 @@ RUN apt-get -qq update && \
       wget \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN wget -q https://dl.google.com/android/repository/tools_r${ANDROID_SDK_TOOLS}-linux.zip -O android-sdk-tools.zip \
+RUN cd /opt \
+    && wget -q https://dl.google.com/android/repository/tools_r${ANDROID_SDK_TOOLS}-linux.zip -O android-sdk-tools.zip \
     && unzip -q android-sdk-tools.zip -d ${ANDROID_HOME} \
     && rm -f android-sdk-tools.zip
 
