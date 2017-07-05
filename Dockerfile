@@ -22,10 +22,9 @@ RUN apt-get -qq update && \
 
 RUN mkdir /android-sdk-linux
 
-RUN cd android-sdk-linux
-RUN wget --quiet --output-document=android-sdk.tgz https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
-RUN tar --extract --gzip --file=android-sdk.tgz
-RUN rm -f android-sdk-tools.zip
+RUN wget -q https://dl.google.com/android/repository/tools_r${ANDROID_SDK_TOOLS}-linux.zip -O android-sdk-tools.zip \
+    && unzip -q android-sdk-tools.zip -d ${ANDROID_HOME} \
+    && rm -f android-sdk-tools.zip
 
 RUN sdkmanager "platform-tools" # Platform tools
 RUN ${ANDROID_HOME}/sdkmanager "platforms;android-$ANDROID_COMPILE_SDK" # SDKs
