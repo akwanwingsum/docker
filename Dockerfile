@@ -20,7 +20,7 @@ RUN apt-get -qq update && \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN wget --quiet --output-document=android-sdk.tgz https://dl.google.com/android/android-sdk_r${ANDROID_SDK_TOOLS}-linux.tgz && \
-  tar --extract --gzip --file=android-sdk.tgz --directory ${ANDROID_HOME}
+    tar --extract --gzip --file=android-sdk.tgz --directory ${ANDROID_HOME}
   
 
 RUN ${ANDROID_HOME}/sdkmanager "platform-tools" && \ # Platform tools
@@ -32,13 +32,13 @@ RUN ${ANDROID_HOME}/sdkmanager "platform-tools" && \ # Platform tools
     
 # Android System Images, for emulators
 # Please keep these in descending order!
-RUN sdkmanager "system-images;android-25;google_apis;armeabi-v7a"
-RUN sdkmanager "system-images;android-24;default;armeabi-v7a"
-RUN sdkmanager "system-images;android-22;default;armeabi-v7a"
-RUN sdkmanager "system-images;android-21;default;armeabi-v7a"
-RUN sdkmanager "system-images;android-19;default;armeabi-v7a"
-RUN sdkmanager "system-images;android-17;default;armeabi-v7a"
-RUN sdkmanager "system-images;android-15;default;armeabi-v7a"
+RUN ${ANDROID_HOME}/sdkmanager "system-images;android-25;google_apis;armeabi-v7a"
+RUN ${ANDROID_HOME}/sdkmanager "system-images;android-24;default;armeabi-v7a"
+RUN ${ANDROID_HOME}/sdkmanager "system-images;android-22;default;armeabi-v7a"
+RUN ${ANDROID_HOME}/sdkmanager "system-images;android-21;default;armeabi-v7a"
+RUN ${ANDROID_HOME}/sdkmanager "system-images;android-19;default;armeabi-v7a"
+RUN ${ANDROID_HOME}/sdkmanager "system-images;android-17;default;armeabi-v7a"
+RUN ${ANDROID_HOME}/sdkmanager "system-images;android-15;default;armeabi-v7a"
 
 RUN export ANDROID_HOME=$PWD/android-sdk-linux && \
     export PATH=$PATH:$PWD/android-sdk-linux/platform-tools
