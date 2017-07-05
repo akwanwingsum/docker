@@ -1,6 +1,7 @@
-FROM openjdk:8-jdk
+FROM ubuntu:16.04
 MAINTAINER Anthony KWS <a.kwanwingsum@futurdigital.fr>
 
+ENV ANDROID_HOME "/android-sdk-linux"
 ENV ANDROID_COMPILE_SDK "26"
 ENV ANDROID_BUILD_TOOLS "26.0.0"
 ENV ANDROID_SDK_TOOLS "24.4.1"
@@ -19,15 +20,28 @@ RUN apt-get -qq update && \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN wget --quiet --output-document=android-sdk.tgz https://dl.google.com/android/android-sdk_r$ANDROID_SDK_TOOLS-linux.tgz && \
-  tar --extract --gzip --file=android-sdk.tgz && \
-  echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter android-$ANDROID_COMPILE_SDK && \
-  echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter platform-tools && \
-  echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter build-tools-$ANDROID_BUILD_TOOLS && \
-  echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter extra-android-m2repository && \
-  echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter extra-google-google_play_services && \
-  echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter extra-google-m2repository && \
-  export ANDROID_HOME=$PWD/android-sdk-linux && \
-  export PATH=$PATH:$PWD/android-sdk-linux/platform-tools
+  tar --extract --gzip --file=android-sdk.tgz --directory $ANDROID_HOME
+  
+
+RUN $ANDROID_HOME/sdkmanager "platform-tools" && \ # Platform tools
+    $ANDROID_HOME/sdkmanager "platforms;android-$ANDROID_COMPILE_SDK" && \ # SDKs
+    $ANDROID_HOME/sdkmanager "build-tools;ANDROID_BUILD_TOOLS" && \ # Build tool
+    $ANDROID_HOME/sdkmanager "extras;android;m2repository" && \ # Extra
+    $ANDROID_HOME/sdkmanager "extras;google;m2repository" && \ # Extra
+    $ANDROID_HOME/sdkmanager "extras;google;google_play_services" # Extra
+    
+# Android System Images, for emulators
+# Please keep these in descending order!
+RUN sdkmanager "system-images;android-25;google_apis;armeabi-v7a"
+RUN sdkmanager "system-images;android-24;default;armeabi-v7a"
+RUN sdkmanager "system-images;android-22;default;armeabi-v7a"
+RUN sdkmanager "system-images;android-21;default;armeabi-v7a"
+RUN sdkmanager "system-images;android-19;default;armeabi-v7a"
+RUN sdkmanager "system-images;android-17;default;armeabi-v7a"
+RUN sdkmanager "system-images;android-15;default;armeabi-v7a"
+
+RUN export ANDROID_HOME=$PWD/android-sdk-linux && \
+    export PATH=$PATH:$PWD/android-sdk-linux/platform-tools
 
 RUN mkdir -p /root/.android && \
   touch /root/.android/repositories.cfg
