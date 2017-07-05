@@ -26,9 +26,8 @@ RUN cd android-sdk-linux
 RUN wget --quiet --output-document=android-sdk.tgz https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
 RUN tar --extract --gzip --file=android-sdk.tgz
 RUN rm -f android-sdk-tools.zip
-RUN cd ..
 
-RUN ${ANDROID_HOME}/sdkmanager "platform-tools" # Platform tools
+RUN sdkmanager "platform-tools" # Platform tools
 RUN ${ANDROID_HOME}/sdkmanager "platforms;android-$ANDROID_COMPILE_SDK" # SDKs
 RUN ${ANDROID_HOME}/sdkmanager "build-tools;ANDROID_BUILD_TOOLS" # Build tool
 RUN ${ANDROID_HOME}/sdkmanager "extras;android;m2repository" # Extra
