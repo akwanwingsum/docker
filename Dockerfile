@@ -28,3 +28,6 @@ RUN wget --quiet --output-document=android-sdk.tgz https://dl.google.com/android
   echo y | android-sdk-linux/tools/android --silent update sdk --no-ui --all --filter extra-google-m2repository && \
   export ANDROID_HOME=$PWD/android-sdk-linux && \
   export PATH=$PATH:$PWD/android-sdk-linux/platform-tools
+
+RUN mkdir -p /root/.android && \
+  touch /root/.android/repositories.cfg
