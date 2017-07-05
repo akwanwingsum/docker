@@ -20,11 +20,11 @@ RUN apt-get -qq update && \
       wget \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN mkdir /android-sdk-linux
-
 RUN wget -q https://dl.google.com/android/repository/tools_r${ANDROID_SDK_TOOLS}-linux.zip -O android-sdk-tools.zip \
     && unzip -q android-sdk-tools.zip -d ${ANDROID_HOME} \
     && rm -f android-sdk-tools.zip
+
+RUN ls
 
 RUN sdkmanager "platform-tools" # Platform tools
 RUN ${ANDROID_HOME}/sdkmanager "platforms;android-$ANDROID_COMPILE_SDK" # SDKs
