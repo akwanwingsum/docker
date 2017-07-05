@@ -1,4 +1,5 @@
 FROM openjdk:8-jdk
+MAINTAINER Anthony KWS <a.kwanwingsum@futurdigital.fr>
 
 RUN apt-get --quiet update --yes \
   apt-get --quiet install --yes wget tar unzip lib32stdc++6 lib32z1 \
