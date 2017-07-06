@@ -27,20 +27,36 @@ RUN cd /opt \
 
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
 
-RUN ls
-RUN ls ${ANDROID_HOME}
-RUN ls ${ANDROID_HOME}/tools
-RUN ls ${ANDROID_HOME}/tools/bin
+# Platform tools
+RUN sdkmanager "platform-tools"
 
-RUN find / -name "sdkmanager"
+# SDKs
+# Please keep these in descending order!
+RUN sdkmanager "platforms;android-26"
+RUN sdkmanager "platforms;android-25"
+RUN sdkmanager "platforms;android-24"
+RUN sdkmanager "platforms;android-23"
+RUN sdkmanager "platforms;android-22"
+RUN sdkmanager "platforms;android-21"
+RUN sdkmanager "platforms;android-20"
+RUN sdkmanager "platforms;android-19"
+RUN sdkmanager "platforms;android-17"
+RUN sdkmanager "platforms;android-15"
+RUN sdkmanager "platforms;android-10"
 
-RUN sdkmanager "platform-tools" # Platform tools
-RUN sdkmanager "platforms;android-$ANDROID_COMPILE_SDK" # SDKs
-RUN sdkmanager "build-tools;$ANDROID_BUILD_TOOLS" # Build tool
-RUN sdkmanager "extras;android;m2repository" # Extra
-RUN sdkmanager "extras;google;m2repository" # Extra
-RUN sdkmanager "extras;google;google_play_services" # Extra
-    
+# build tools
+# Please keep these in descending order!
+RUN sdkmanager "build-tools;26.0.0"
+RUN sdkmanager "build-tools;25.0.3"
+RUN sdkmanager "build-tools;25.0.2"
+RUN sdkmanager "build-tools;24.0.3"
+RUN sdkmanager "build-tools;23.0.3"
+RUN sdkmanager "build-tools;22.0.1"
+RUN sdkmanager "build-tools;21.1.2"
+RUN sdkmanager "build-tools;20.0.0"
+RUN sdkmanager "build-tools;19.1.0"
+RUN sdkmanager "build-tools;17.0.0"
+
 # Android System Images, for emulators
 # Please keep these in descending order!
 RUN sdkmanager "system-images;android-25;google_apis;armeabi-v7a"
@@ -50,6 +66,11 @@ RUN sdkmanager "system-images;android-21;default;armeabi-v7a"
 RUN sdkmanager "system-images;android-19;default;armeabi-v7a"
 RUN sdkmanager "system-images;android-17;default;armeabi-v7a"
 RUN sdkmanager "system-images;android-15;default;armeabi-v7a"
+
+# Extra
+RUN sdkmanager "extras;android;m2repository"
+RUN sdkmanager "extras;google;m2repository"
+RUN sdkmanager "extras;google;google_play_services"
 
 RUN export ANDROID_HOME=$PWD/android-sdk-linux && \
     export PATH=$PATH:$PWD/android-sdk-linux/platform-tools
