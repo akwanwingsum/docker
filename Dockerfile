@@ -32,7 +32,7 @@ RUN ls ${ANDROID_HOME}
 RUN ls ${ANDROID_HOME}/tools
 RUN ls ${ANDROID_HOME}/tools/bin
 
-RUN ls /opt
+RUN find / -name "sdkmanager"
 
 RUN ${ANDROID_HOME}/tools/bin/sdkmanager "platform-tools" # Platform tools
 RUN ${ANDROID_HOME}/sdkmanager "platforms;android-$ANDROID_COMPILE_SDK" # SDKs
