@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER Anthony KWS <a.kwanwingsum@futurdigital.fr>
 
 ENV ANDROID_HOME "/opt/android-sdk-linux"
@@ -80,7 +80,7 @@ RUN export ANDROID_HOME=$PWD/android-sdk-linux && \
 
 
 # Required for Android ARM Emulator
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libqt5widgets5
+#RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libqt5widgets5
 ENV QT_QPA_PLATFORM offscreen
 ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${ANDROID_HOME}/tools/lib64
 
