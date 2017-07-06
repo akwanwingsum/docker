@@ -36,7 +36,7 @@ RUN find / -name "sdkmanager"
 
 RUN sdkmanager "platform-tools" # Platform tools
 RUN sdkmanager "platforms;android-$ANDROID_COMPILE_SDK" # SDKs
-RUN sdkmanager "build-tools;ANDROID_BUILD_TOOLS" # Build tool
+RUN sdkmanager "build-tools;$ANDROID_BUILD_TOOLS" # Build tool
 RUN sdkmanager "extras;android;m2repository" # Extra
 RUN sdkmanager "extras;google;m2repository" # Extra
 RUN sdkmanager "extras;google;google_play_services" # Extra
