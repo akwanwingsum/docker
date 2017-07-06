@@ -75,5 +75,26 @@ RUN sdkmanager "extras;google;google_play_services"
 RUN export ANDROID_HOME=$PWD/android-sdk-linux && \
     export PATH=$PATH:$PWD/android-sdk-linux/platform-tools
 
+# ------------------------------------------------------
+# --- Install additional packages
+
+
+# Required for Android ARM Emulator
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libqt5widgets5
+ENV QT_QPA_PLATFORM offscreen
+ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${ANDROID_HOME}/tools/lib64
+
+# Required for accepting licences
+RUN mkdir -p ${ANDROID_HOME}/licenses
+RUN echo 8933bad161af4178b1185d1a37fbf41ea5269c55 > ${ANDROID_HOME}/licenses/android-sdk-license
+RUN echo y | ${ANDROID_HOME}/tools/android update sdk --no-ui --all --filter "android-25"
+
+# ------------------------------------------------------
+# --- Cleanup and rev num
+
+# Cleaning
+RUN apt-get clean
+
+
 RUN mkdir -p /root/.android && \
   touch /root/.android/repositories.cfg
