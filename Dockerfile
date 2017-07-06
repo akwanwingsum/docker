@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:14.04
 MAINTAINER Anthony KWS <a.kwanwingsum@futurdigital.fr>
 
 ENV ANDROID_HOME "/opt/android-sdk-linux"
