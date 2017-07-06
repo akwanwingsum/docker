@@ -29,6 +29,8 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}
 
 RUN ls
 RUN ls ${ANDROID_HOME}
+RUN ls ${ANDROID_HOME}/tools
+RUN ls ${ANDROID_HOME}/tools/bin
 
 RUN ${ANDROID_HOME}/tools/bin/sdkmanager "platform-tools" # Platform tools
 RUN ${ANDROID_HOME}/sdkmanager "platforms;android-$ANDROID_COMPILE_SDK" # SDKs
