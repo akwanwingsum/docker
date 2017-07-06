@@ -20,10 +20,14 @@ RUN apt-get -qq update && \
       wget \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN cd /opt \
-    && wget -q https://dl.google.com/android/repository/tools_r${ANDROID_SDK_TOOLS}-linux.zip -O android-sdk-tools.zip \
-    && unzip -q android-sdk-tools.zip -d ${ANDROID_HOME} \
-    && rm -f android-sdk-tools.zip
+#RUN cd /opt \
+#    && wget -q https://dl.google.com/android/repository/tools_r${ANDROID_SDK_TOOLS}-linux.zip -O android-sdk-tools.zip \
+#    && unzip -q android-sdk-tools.zip -d ${ANDROID_HOME} \
+#    && rm -f android-sdk-tools.zip
+    
+    RUN curl -s https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip > sdk.zip && \
+    unzip sdk.zip -d ${ANDROID_HOME} && \
+    rm -v sdk.zip
 
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
 
