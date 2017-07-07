@@ -84,8 +84,6 @@ RUN export ANDROID_HOME=$PWD/android-sdk-linux && \
 ENV QT_QPA_PLATFORM offscreen
 ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${ANDROID_HOME}/tools/lib64
 
-RUN echo Y | DEBIAN_FRONTEND=noninteractive apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
-
 # Required for accepting licences
 RUN mkdir -p ${ANDROID_HOME}/licenses
 RUN echo 8933bad161af4178b1185d1a37fbf41ea5269c55 > ${ANDROID_HOME}/licenses/android-sdk-license
