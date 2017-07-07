@@ -84,7 +84,7 @@ RUN export ANDROID_HOME=$PWD/android-sdk-linux && \
 ENV QT_QPA_PLATFORM offscreen
 ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${ANDROID_HOME}/tools/lib64
 
-RUN echo Y | DEBIAN_FRONTEND=noninteractive apt-get install libqt5quickwidgets5
+RUN echo Y | DEBIAN_FRONTEND=noninteractive apt-get install libqt5widgets5
 RUN echo Y | DEBIAN_FRONTEND=noninteractive apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
 
 # Required for accepting licences
